@@ -24,7 +24,7 @@ connection.connect(err => {
 app.get("/tasks", async (req, res) => {
     // Récupération de la liste des tâches
     const tasks = await Task.findAll();
-  
+  l
     // Envoi de la réponse
     res.status(200).json(tasks);
   });
