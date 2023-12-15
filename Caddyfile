@@ -1,22 +1,6 @@
-portfolio.exemple.com {
+portfolio.exemple.localhost {
     tls internal
-    root * portfolio
+    root * \portfolio\public\index.html
     file_server
-    reverse_proxy / http://localhost:80
-    reverse_proxy / https://localhost:443
-}
 
-todo.exemple.com {
-    tls internal
-    root * todo
-    file_server
-    encode gzip
-    reverse_proxy / http://localhost:4000
-    reverse_proxy / https://localhost:4000
-
-    @pagination {
-        path_regexp pagination /tasks/(\d+)
-    }
-
-    rewrite @pagination /tasks?page={re.pagination.1}
 }
