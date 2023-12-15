@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --foreground-hex: #f8f8f2;
+    --background-hex: #1c1d22;
+  
+  }
+  
+  * {
+    font-family: 'Roboto Mono', monospace;
+  }
+  
+  body {
+    color: var(--foreground-hex);
+    background: var(--background-hex);
+  }
+  
