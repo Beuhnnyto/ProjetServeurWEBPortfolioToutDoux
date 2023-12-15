@@ -1,15 +1,15 @@
 portfolio.exemple.com {
     tls internal
     root * portfolio
-    file_server browse
+    file_server
     reverse_proxy / http://localhost:80
     reverse_proxy / https://localhost:443
 }
 
-todolist.exemple.com {
+todo.exemple.com {
     tls internal
-    root * todo-list
-    file_server browse
+    root * todo
+    file_server
     encode gzip
     reverse_proxy / http://localhost:4000
     reverse_proxy / https://localhost:4000
