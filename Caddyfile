@@ -1,0 +1,22 @@
+localhost
+
+tls internal
+
+file_server browse
+
+handle_errors {
+    @404 {
+        expression {http.error.status_code} == 404
+    }
+    rewrite @404 /error.html
+}
+
+nouveau-site.localhost {
+    root * todo-list
+    file_server
+}
+
+ancien-site.localhost {
+    root * portfolio
+    file_server
+}
