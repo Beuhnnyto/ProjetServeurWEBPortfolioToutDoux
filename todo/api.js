@@ -2,6 +2,10 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const mysql = require('mysql');
+var ports = [4000,4001,4002,4003,4004,4005,4006,4007,4008,4009]
+//use express
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 // Create a MySQL connection
 const connection = mysql.createConnection({
@@ -10,6 +14,7 @@ const connection = mysql.createConnection({
   password: '',
   database: 'tasks.sql'
 });
+
 
 // Connect to the MySQL database
 connection.connect((err) => {
@@ -24,40 +29,23 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-app.get('/tasks', (req, res) => {
-  connection.query('SELECT * FROM tasks', (err, rows) => {
-    if (err) {
-      console.error('Error executing query:', err);
-      return;
-    }
-    res.send(rows);
-  });
-});
-
 app.post('/tasks', (req, res) => {
-  const task = req.body.task;
-  connection.query('INSERT INTO tasks (task) VALUES (?)', [task], (err, result) => {
+  console.log(req.body);
+  title = req.body.title;
+  description = req.body.description;
+
+  const query = `INSERT INTO tasks (title, description, done) VALUES ('${title}', '${description}', 0)`;
+  connection.query(query, (err, results) => {
     if (err) {
-      console.error('Error executing query:', err);
+      console.error('Error connecting to MySQL database:', err);
       return;
     }
-    res.send(result);
+    res.send(results);
   });
 });
 
-app.delete('/tasks/:id', (req, res) => {
-  const id = req.params.id;
-  connection.query('DELETE FROM tasks WHERE id = ?', [id], (err, result) => {
-    if (err) {
-      console.error('Error executing query:', err);
-      return;
-    }
-    res.send(result);
+ports.forEach(port => {
+  app.listen(port, () => {
+    console.log(`Server listening on localhost:${port}`);
   });
-});
-
-
-
-app.listen(4000, () => {
-  console.log('Server is running on port 3000');
 });

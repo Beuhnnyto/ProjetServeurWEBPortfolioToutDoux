@@ -7,12 +7,6 @@ portfolio.exemple.localhost {
 todo.exemple.localhost {
     encode gzip
     reverse_proxy localhost:4000
-    reverse_proxy localhost:4001
-    reverse_proxy localhost:4002
 
-    @paginate {
-        path_regexp paginate /task/(\d+)
-    }
-    rewrite @paginate /index.html?task={re.paginate.1}
 }
 
