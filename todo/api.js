@@ -48,6 +48,19 @@ app.get('/', (_, res) => {
       <html>
         <head>
           <title>Tasks</title>
+          <style>
+            table {
+              border-collapse: collapse;
+            }
+            th, td {
+              border: 1px solid black;
+              padding: 5px;
+            }
+            th {
+              background-color: #4CAF50;
+              color: white;
+            }
+          </style>
         </head>
         <body>
           <h1>Tasks</h1>
