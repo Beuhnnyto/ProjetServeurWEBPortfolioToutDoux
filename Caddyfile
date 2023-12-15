@@ -1,16 +1,22 @@
-portefolio.exemple.com {
-	tls internal
-	root * portefolio
-	file_server browse
-	reverse_proxy / http://localhost:80
-	reverse_proxy / https://localhost:443
+portfolio.exemple.com {
+    tls internal
+    root * portfolio
+    file_server browse
+    reverse_proxy / http://localhost:80
+    reverse_proxy / https://localhost:443
 }
 
 todolist.exemple.com {
-	tls internal
-	root * todo-list
-	file_server browse
-	encode gzip
-	reverse_proxy / http://localhost:4000
-	reverse_proxy / https://localhost:4000
+    tls internal
+    root * todo-list
+    file_server browse
+    encode gzip
+    reverse_proxy / http://localhost:4000
+    reverse_proxy / https://localhost:4000
+
+    @pagination {
+        path_regexp pagination /tasks/(\d+)
+    }
+
+    rewrite @pagination /tasks?page={re.pagination.1}
 }
