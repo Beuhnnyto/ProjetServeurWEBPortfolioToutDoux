@@ -1,5 +1,13 @@
-portfolio.example.localhost {
-       root * /path/to/your/react/app
-       encode gzip
-       file_server
-   }
+portfolio.exemple.localhost {
+    root * portfolio\build
+    encode gzip
+    file_server
+}
+
+todo.exemple.localhost {
+    root * todo
+    encode gzip
+    file_server
+    reverse_proxy localhost:4000
+}
+

@@ -10,7 +10,7 @@ const connection = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "",
-  database: "todo-list"
+  database: "tasks.sql"
 });
 
 connection.connect(err => {
