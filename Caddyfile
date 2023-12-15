@@ -1,6 +1,5 @@
-portfolio.exemple.localhost {
-    tls internal
-    root * \portfolio\public\index.html
-    file_server
-
-}
+portfolio.example.localhost {
+       root * /path/to/your/react/app
+       encode gzip
+       file_server
+   }
