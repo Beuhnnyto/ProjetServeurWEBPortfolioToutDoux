@@ -47,6 +47,10 @@ const Navbar = () => {
                     >
                         Projects
                     </a>
+                    <a href="https://todo.example.com" className="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-lime-400 hover:underline transition duration-75 ease-in-out ml-4">
+                        Todo
+                    </a>
+
                 </div>
                 <div>
                     <a
