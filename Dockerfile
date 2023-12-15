@@ -9,4 +9,4 @@ COPY todo /srv/todo
 
 EXPOSE 80 443
 
-CMD ["caddy", "run"]
+CMD ["bash", "start.sh"]

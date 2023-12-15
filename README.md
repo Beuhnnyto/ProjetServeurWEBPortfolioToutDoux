@@ -14,4 +14,4 @@
 docker build -t projet-serveur-web .
 
 # Lancez le conteneur Docker
-docker run -p 80:80 -p 443:443 projet-serveur-web
+docker build -t projet-serveur-web .
