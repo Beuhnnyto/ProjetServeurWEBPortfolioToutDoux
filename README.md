@@ -9,6 +9,14 @@
 ### Docker
 
 #### Prérequis
+ajouter les lignes suivantes dans le fichier hosts de votre machine
+
+```bash
+127.0.0.1 portfolio.exemple.localhost
+127.0.0.1 todo.exemple.localhost
+```
+
+
 
 # Construire l'image Docker
 docker build -t projet-serveur-web .
