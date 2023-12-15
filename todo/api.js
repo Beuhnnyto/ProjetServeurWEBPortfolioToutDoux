@@ -39,30 +39,48 @@ app.get('/', (_, res) => {
         <form action="/${task.id}" method="POST">
           <input type="checkbox" name="done" onchange="this.form.submit()" ${task.done ? 'checked' : ''}>
         </form>
+      </td><td>
+        <form action="/${task.id}/delete" method="POST">
+          <input type="submit" value="Delete">
+        </form>
+
 
       </td></tr>`;
     });
-    const table = `<table><tr><th>Title</th><th>Description</th><th>Done</th></tr>${tableRows}</table>`;
+    const table = `<table><tr><th>Title</th><th>Description</th><th>Done</th><th>Delete ?</th></tr>${tableRows}</table>`;
     
     const html = `
       <html>
         <head>
           <title>Tasks</title>
           <style>
+            body {
+              font-family: sans-serif;
+              background-color: #000600;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              text-align: center;
+              color: white;
+            }
+
             table {
               border-collapse: collapse;
             }
             th, td {
-              border: 1px solid black;
+              border: 3px solid white;
               padding: 5px;
             }
             th {
-              background-color: #4CAF50;
               color: white;
             }
           </style>
         </head>
         <body>
+         <nav>
+            <a href="https://portfolio.exemple.localhost">Portfolio</a>
+        </nav>
+
           <h1>Tasks</h1>
           ${table}
           <form action="/" method="POST">
@@ -109,6 +127,21 @@ app.post('/:id', (req, res) => {
   });
 }
 );
+
+app.post('/:id/delete', (req, res) => {
+  const { id } = req.params;
+  const query = `DELETE FROM tasks WHERE id = ${id}`;
+  connection.query(query, (err, results) => {
+    if (err) {
+      console.error('Error connecting to MySQL database:', err);
+      return;
+    }
+    
+    res.redirect('/');
+  });
+}
+);
+
 
 
 ports.forEach(port => {
