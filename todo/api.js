@@ -1,73 +1,63 @@
-const express = require("express");
-const cors = require("cors");
-const mysql = require("mysql");
-
+const express = require('express');
 const app = express();
-app.use(cors());
+const path = require('path');
+const mysql = require('mysql');
 
-// Connexion à la base de données
+// Create a MySQL connection
 const connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "tasks.sql"
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'tasks.sql'
 });
 
-connection.connect(err => {
+// Connect to the MySQL database
+connection.connect((err) => {
   if (err) {
-    console.error('Error connecting to MySQL:', err);
-  } else {
-    console.log('Connected to MySQL');
+    console.error('Error connecting to MySQL database:', err);
+    return;
   }
+  console.log('Connected to MySQL database');
 });
-// Routes
-app.get("/tasks", async (req, res) => {
-    // Récupération de la liste des tâches
-    const tasks = await Task.findAll();
-  l
-    // Envoi de la réponse
-    res.status(200).json(tasks);
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+app.get('/tasks', (req, res) => {
+  connection.query('SELECT * FROM tasks', (err, rows) => {
+    if (err) {
+      console.error('Error executing query:', err);
+      return;
+    }
+    res.send(rows);
   });
-  app.post("/tasks", async (req, res) => {
-    // Création d'une nouvelle tâche
-    const task = new Task({
-      title: req.body.title,
-      description: req.body.description,
-      completed: false,
-    });
-  
-    // Enregistrement de la tâche
-    await task.save();
-  
-    // Envoi de la réponse
-    res.status(201).json(task);
+});
+
+app.post('/tasks', (req, res) => {
+  const task = req.body.task;
+  connection.query('INSERT INTO tasks (task) VALUES (?)', [task], (err, result) => {
+    if (err) {
+      console.error('Error executing query:', err);
+      return;
+    }
+    res.send(result);
   });
-  app.put("/tasks/:id", async (req, res) => {
-    // Récupération de la tâche à mettre à jour
-    const task = await Task.findById(req.params.id);
-  
-    // Mise à jour de la tâche
-    task.title = req.body.title;
-    task.description = req.body.description;
-    task.completed = req.body.completed;
-  
-    // Enregistrement de la tâche
-    await task.save();
-  
-    // Envoi de la réponse
-    res.status(200).json(task);
+});
+
+app.delete('/tasks/:id', (req, res) => {
+  const id = req.params.id;
+  connection.query('DELETE FROM tasks WHERE id = ?', [id], (err, result) => {
+    if (err) {
+      console.error('Error executing query:', err);
+      return;
+    }
+    res.send(result);
   });
-  app.delete("/tasks/:id", async (req, res) => {
-    // Récupération de la tâche à supprimer
-    const task = await Task.findById(req.params.id);
-  
-    // Suppression de la tâche
-    await task.delete();
-  
-    // Envoi de la réponse
-    res.status(200).json("Task deleted");
-  });
-  
-  app.listen(3000, () => {
-    console.log("API listening on port 3000");
-  });
+});
+
+
+
+app.listen(4000, () => {
+  console.log('Server is running on port 3000');
+});
