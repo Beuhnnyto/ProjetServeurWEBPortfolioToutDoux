@@ -7,6 +7,5 @@ portfolio.exemple.localhost {
 todo.exemple.localhost {
     encode gzip
     reverse_proxy localhost:4000
-
 }
 
