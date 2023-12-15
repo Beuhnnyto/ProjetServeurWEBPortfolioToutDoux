@@ -9,27 +9,46 @@
 <body>
     <h1>Todo List</h1>
     <table>
-        <thead>
-            <tr>
-                <th>Titre</th>
-                <th>description</th>
-                <th>completed ?</th>
-            </tr>
-        </thead>
         <tbody>
-            
+            <tr>
+                <form action="/tasks" method="POST"></form>
+                    <td>
+                        <input type="text" name="title" placeholder="Titre de la tâche">
+                    </td>
+                    <td colspan="2">
+                        <input type="text" name="description" placeholder="description">
+                    </td>
+                    <td>
+                        <button type="submit">Ajouter</button>
+                    </td>
+                </form>
+            </tr>
+            <tr>
+                <td>Titre de la tâche</td>
+                <td>Description de la tâche</td>
+                <td>Completed ?</td>
+                <td>Supprimer</td>
+            </tr>
+            <script>
+                results.forEach(task => {
+                    const row = document.createElement("tr");
+                    const titleCell = document.createElement("td");
+                    titleCell.textContent = task.title;
+                    row.appendChild(titleCell);
+                    const descriptionCell = document.createElement("td");
+                    descriptionCell.textContent = task.description;
+                    row.appendChild(descriptionCell);
+                    const doneCell = document.createElement("td");
+                    doneCell.textContent = task.done ? "Yes" : "No";
+                    row.appendChild(doneCell);
+                    const deleteCell = document.createElement("td");
+                    const deleteForm = document.createElement("form");
+                    document.querySelector("tbody").appendChild(row);
+                });
+            </script>
+        </tbody>
     </table>
 
-    <form action="/tasks" method="POST">
-        <input type="text" name="title" placeholder="Titre de la tâche">
-        <input type="text" name="description" placeholder="description">
-        <button type="submit">Ajouter</button>
-    </form>
 
-
-</body>
-</html>
-    
-    
 </body>
 </html>

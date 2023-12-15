@@ -25,8 +25,15 @@ connection.connect((err) => {
   console.log('Connected to MySQL database');
 });
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+app.get('/', (_, res) => {
+  const query = 'SELECT * FROM tasks';
+  connection.query(query, (err, results) => {
+    if (err) {
+      console.error('Error connecting to MySQL database:', err);
+      return;
+    }
+    res.render('index.html', { tasks: results });
+  });
 });
 
 app.post('/tasks', (req, res) => {
