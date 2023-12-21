@@ -52,28 +52,70 @@ app.get('/', (_, res) => {
     const html = `
       <html>
         <head>
-          <title>Tasks</title>
+          <title>My todo list</title>
           <style>
-            body {
-              font-family: sans-serif;
-              background-color: #000600;
-              display: flex;
-              flex-direction: column;
-              align-items: center;
-              text-align: center;
-              color: white;
-            }
+          body {
+            background-color: #222;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
 
-            table {
-              border-collapse: collapse;
-            }
-            th, td {
-              border: 3px solid white;
-              padding: 5px;
-            }
-            th {
-              color: white;
-            }
+          }
+        
+          h1 {
+            color: green;
+          }
+        
+          table {
+            border-collapse: separate;
+            border: solid #fff 1px;
+            border-radius: 6px;
+          }
+        
+          td, th {
+            border-left: solid #fff 1px;
+            border-top: solid #fff 1px;
+          }
+        
+          th {
+            background-color: green;
+            border-top: none;
+            font-family: Roboto, sans-serif;
+
+          }
+        
+          td:first-child, th:first-child {
+            border-left: none;
+          }
+        
+          input[type="text"], input[type="submit"] {
+            color: #222;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+          }
+        
+          input[type="text"] {
+            width: 200px;
+            margin-right: 10px;
+          }
+        
+          input[type="submit"] {
+            margin-top: 10px;
+          }
+        
+          a {
+            color: white;
+            text-decoration: none;
+          }
+        
+          a:hover {
+            color: lime;
+            text-decoration: underline;
+          }
           </style>
         </head>
         <body>
@@ -81,8 +123,11 @@ app.get('/', (_, res) => {
             <a href="https://portfolio.exemple.localhost">Portfolio</a>
         </nav>
 
-          <h1>Tasks</h1>
+          <h1>My todo list</h1>
           ${table}
+          <br>
+          
+          <h2>Add a task</h2>
           <form action="/" method="POST">
             <input type="text" name="title" placeholder="Title" required>
             <input type="text" name="description" placeholder="Description" required>
@@ -96,6 +141,11 @@ app.get('/', (_, res) => {
 
 
   });
+  /* FILEPATH: /c:/Users/AdamM/Documents/X_BAC_DEV_2/S3/ServWEB/ProjetServeurWEBPortfolioToutDoux/todo/style.css */
+  /* BEGIN: 8f7g6h5j4k3l2 */
+ 
+
+  /* END: 8f7g6h5j4k3l2 */
 });
 
 app.post('/', (req, res) => {
