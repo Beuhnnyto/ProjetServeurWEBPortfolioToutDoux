@@ -5,11 +5,9 @@ const mysql = require('mysql');
 
 var ports = [4000, 4001, 4002, 4003, 4004, 4005, 4006, 4007, 4008, 4009];
 
-//use express
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Create a MySQL connection
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
@@ -17,7 +15,6 @@ const connection = mysql.createConnection({
   database: 'tasks.sql'
 });
 
-// Connect to the MySQL database
 connection.connect((err) => {
   if (err) {
     console.error('Error connecting to MySQL database:', err);
@@ -141,11 +138,7 @@ app.get('/', (_, res) => {
 
 
   });
-  /* FILEPATH: /c:/Users/AdamM/Documents/X_BAC_DEV_2/S3/ServWEB/ProjetServeurWEBPortfolioToutDoux/todo/style.css */
-  /* BEGIN: 8f7g6h5j4k3l2 */
- 
 
-  /* END: 8f7g6h5j4k3l2 */
 });
 
 app.post('/', (req, res) => {
